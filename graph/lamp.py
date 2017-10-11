@@ -27,6 +27,12 @@ class Lamp(object):
 			else:
 				raise ValueError('No free numbers')
 	
+	number = property(lambda self: self.__Number)
+	ambient = property(lambda self: self.__Ambient)
+	diffuse = property(lambda self: self.__Diffuse)
+	specular = property(lambda self: self.__Specular)
+	position = property(lambda self: self.__Position)
+	
 	@property
 	def enable(self):
 		return glIsEnable(self.__Number)
@@ -37,17 +43,11 @@ class Lamp(object):
 			glEnable(self.__Number)
 		else:
 			glDisable(self.__Number)
-	
-	number = property (lambda self: self.__Number)
-	ambient = property(lambda self: self.__Ambient)
-	diffuse = property(lambda self: self.__Diffuse)
-	specular = property(lambda self: self.__Specular)
-	position = property(lambda self: self.__Position)
-	
+		
 	@ambient.setter
 	def ambient(self, value):
 		glLightfv(self.__Number, GL_AMBIENT, value)
-		self.__Ambient
+		self.__Ambient = value
 		
 	@diffuse.setter
 	def diffuse(self, value):

@@ -4,3 +4,4 @@
 from .application import *
 from .draw_contexts import *
 from .lamp import *
+from .cube import *

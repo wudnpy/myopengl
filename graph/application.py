@@ -13,7 +13,6 @@ from OpenGL.GLUT import *
 class Application(object, metaclass = ABCMeta):
 
 	def __init__(self):
-		
 		self.__DisplayMode = set([
 			GLUT_RGBA,
 			GLUT_DOUBLE,
@@ -92,6 +91,9 @@ class Application(object, metaclass = ABCMeta):
 	def draw_stage(self):
 		pass
 	
+	def timer(self, number):
+		pass
+	
 	def resize(self, width, height):
 		glViewport(0, 0, width, height)
 		glMatrixMode(GL_PROJECTION)
@@ -110,9 +112,10 @@ class Application(object, metaclass = ABCMeta):
 		glEnable(GL_COLOR_MATERIAL)
 		self.lifgting = True
 		
-		glutReshapeFunc(self.resize)
-		glutDisplayFunc(self.draw)
-		
+		glutTimerFunc( 1000//30, self.timer, 1 )
+		glutReshapeFunc(self.resize) # функция которую использует главный цикл, для отслеживания изменения размера окна
+		glutDisplayFunc(self.draw) # функция которую использует главный цикл, для отрисовки сцены
+	
 	def run(self):
 		self.init_window()
 		self.init_context()
